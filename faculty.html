@@ -1,0 +1,561 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="theme.js"></script>
+<script>
+  document.documentElement.classList.add('fonts-loading');
+  const revealFonts = () => {
+    document.documentElement.classList.remove('fonts-loading');
+    document.documentElement.classList.add('fonts-ready');
+    window.dispatchEvent(new Event('fontsready'));
+  };
+  if ('fonts' in document) {
+    Promise.race([
+      document.fonts.ready,
+      new Promise(resolve => window.setTimeout(resolve, 1200))
+    ]).then(revealFonts);
+  } else {
+    window.addEventListener('load', revealFonts, { once: true });
+  }
+</script>
+<style>
+  html.fonts-loading body { opacity: 0; }
+  html body { transition: opacity 140ms ease; }
+</style>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#bcc7dd",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e5e9eb",
+                        "tertiary-fixed": "#ffddba",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-background": "#181c1e",
+                        "surface-dim": "#d7dadc",
+                        "inverse-on-surface": "#eef1f3",
+                        "surface": "#f7fafc",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#4f2e00",
+                        "tertiary": "#321b00",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#43474e",
+                        "background": "#f7fafc",
+                        "surface-container": "#ebeef0",
+                        "outline-variant": "#c4c6cf",
+                        "on-tertiary-fixed": "#2b1700",
+                        "primary-fixed-dim": "#adc7f7",
+                        "tertiary-fixed-dim": "#f2bc82",
+                        "on-surface": "#181c1e",
+                        "inverse-primary": "#adc7f7",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#111c2c",
+                        "secondary-fixed": "#d8e3fa",
+                        "outline": "#74777f",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "secondary-container": "#d5e0f7",
+                        "surface-tint": "#455f88",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#86a0cd",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7fafc",
+                        "on-tertiary-fixed-variant": "#633f0f",
+                        "on-primary-fixed": "#001b3c",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary": "#545f72",
+                        "primary": "#002045",
+                        "on-secondary-container": "#586377",
+                        "primary-container": "#1a365d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#c6955e",
+                        "surface-container-low": "#f1f4f6",
+                        "on-secondary-fixed-variant": "#3c475a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blade-accent {
+            background: linear-gradient(to bottom, #d6e3ff, #002045);
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #002045 0%, #1A365D 100%);
+        }
+        nav.glass-nav {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+            transform: translateZ(0);
+            transition:
+                background-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                -webkit-backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: background-color, border-color, box-shadow, backdrop-filter;
+        }
+
+        nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+        }
+
+        .dark nav.glass-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+        }
+
+        .dark nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .dark nav.glass-nav .font-headline {
+            color: #d6e3ff;
+        }
+
+        .dark nav.glass-nav .nav-link {
+            color: #eef1f3;
+        }
+
+        .dark nav.glass-nav .nav-link:hover,
+        .dark nav.glass-nav .nav-link.border-blue-900 {
+            color: #adc7f7;
+            border-bottom-color: #adc7f7;
+        }
+
+        nav.glass-nav > * {
+            position: relative;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        .nav-link {
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            backdrop-filter: saturate(150%) blur(16px);
+            -webkit-backdrop-filter: saturate(150%) blur(16px);
+        }
+
+        @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+            nav.glass-nav {
+                background-color: rgba(255, 255, 255, 0.72);
+            }
+
+            nav.glass-nav.is-scrolled {
+                background-color: rgba(255, 255, 255, 0.94);
+            }
+        }
+
+        nav.glass-nav::before,
+        nav.glass-nav::after {
+            display: none !important;
+            content: none !important;
+        }
+
+
+        /* Page Transition Effects */
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); }
+            to { transform: translateX(100%); }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+    <style>
+        .load-reveal {
+            opacity: 0;
+            transform: translate3d(0, 14px, 0);
+            filter: blur(10px);
+            transition-property: opacity, transform, filter;
+            transition-duration: 260ms, 260ms, 320ms;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform, filter;
+        }
+        .load-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            filter: blur(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .load-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+<link href="theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim selection:text-primary">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 inset-x-0 w-full z-50 glass-nav">
+  <div class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-3 md:py-4 max-w-screen-2xl mx-auto gap-4">
+    <div class="text-lg sm:text-xl md:text-2xl font-black tracking-tighter text-blue-900 font-headline uppercase truncate min-w-0">
+      Elementary Science Academy
+    </div>
+    <div class="hidden lg:flex items-center space-x-8">
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="index.html">Home</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="about.html">About Us</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="courses.html">Courses</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="ESAT.html">ESAT</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="faculty.html">Faculty</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="facilities.html">Facilities</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="contact.html">Contact</a>
+    </div>
+    <a href="https://forms.gle/Ps53tca4W1hRnJbM7" class="bg-primary text-on-primary px-4 sm:px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95 whitespace-nowrap flex-shrink-0">
+      Enroll Now
+    </a>
+  </div>
+</nav>
+<main class="pt-32 pb-24 px-8 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+<div class="lg:col-span-8">
+<span class="label-md font-semibold text-primary uppercase tracking-widest mb-4 block" style="">Our Educators</span>
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-on-surface leading-tight tracking-tighter mb-6" style="">
+                        Dedicated subject experts.
+                    </h1>
+</div>
+<div class="lg:col-span-4 pb-2">
+<p class="text-on-surface-variant text-xl leading-relaxed max-w-sm" style="">
+                        Focus on concept clarity and personal guidance to unlock every student's scientific potential.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Faculty Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Faculty Member: Shubham Gupta -->
+<div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden transition-all duration-300 hover:surface-container shadow-sm hover:shadow-xl p-6 flex flex-col h-full">
+<div class="absolute left-0 top-0 bottom-0 w-1 blade-accent"></div>
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-8 relative">
+<img alt="Ashutosh Sharma" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Professional studio portrait of a male teacher in a formal blue shirt, warm smile, soft bokeh background of a library" src="Photos/ASHUTOSH.png" style="">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-2xl text-primary" style="">Ashutosh Sharma</h3>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="rocket_launch" style="">rocket_launch</span>
+</div>
+<p class="label-md font-semibold text-on-surface-variant uppercase tracking-wider mb-4" style="">Chemistry Faculty</p>
+<p class="text-on-surface-variant body-lg leading-relaxed mb-6" style="">Expert in simplifying Organic, Inorganic &amp; Physical Chemistry with a results-driven approach. Known for strong conceptual clarity and consistent student performance in boards &amp; competitive exams.</p>
+<div class="mt-auto pt-6 border-t border-surface-container-low flex items-center justify-between">
+<span class="text-sm font-label text-slate-500" style="">10+ Years Exp.</span>
+<div class="flex space-x-3">
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="mail" style="">mail</span>
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="person" style="">person</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Faculty Member: Ashutosh Sharma -->
+<div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden transition-all duration-300 hover:surface-container shadow-sm hover:shadow-xl p-6 flex flex-col h-full">
+<div class="absolute left-0 top-0 bottom-0 w-1 blade-accent"></div>
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-8 relative">
+<img alt="Shubham Gupta" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Confident male science professor with glasses, modern office setting with scientific glassware in soft focus" src="Photos/SHUBHAM.png" style="">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-2xl text-primary" style="">Shubham Gupta</h3>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="science" style="">science</span>
+</div>
+<p class="label-md font-semibold text-on-surface-variant uppercase tracking-wider mb-4" style="">Physics faculty</p>
+<p class="text-on-surface-variant body-lg leading-relaxed mb-6" style="">Bridging the gap between complex equations and real-world phenomena through interactive laboratory experiments.</p>
+<div class="mt-auto pt-6 border-t border-surface-container-low flex items-center justify-between">
+<span class="text-sm font-label text-slate-500" style="">8+ Years Exp.</span>
+<div class="flex space-x-3">
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="mail" style="">mail</span>
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="person" style="">person</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Faculty Member: Khushi Sharma -->
+<div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden transition-all duration-300 hover:surface-container shadow-sm hover:shadow-xl p-6 flex flex-col h-full">
+<div class="absolute left-0 top-0 bottom-0 w-1 blade-accent"></div>
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-8 relative">
+<img alt="Khushi Sharma" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Professional woman educator with a friendly smile, classroom background with botanical diagrams in soft focus" src="Photos/KHUSHI.png" style="">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-2xl text-primary" style="">Khushi Sharma</h3>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="biotech" style="">biotech</span>
+</div>
+<p class="label-md font-semibold text-on-surface-variant uppercase tracking-wider mb-4" style="">Biology Faculty</p>
+<p class="text-on-surface-variant body-lg leading-relaxed mb-6" style="">
+                        Expert in genetics and ecology, dedicated to nurturing curiosity about the natural world and biological systems.
+                    </p>
+<div class="mt-auto pt-6 border-t border-surface-container-low flex items-center justify-between">
+<span class="text-sm font-label text-slate-500" style="">12+ Years Exp.</span>
+<div class="flex space-x-3">
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="mail" style="">mail</span>
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="person" style="">person</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Faculty Member: Suresh Chaudhary -->
+<div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden transition-all duration-300 hover:surface-container shadow-sm hover:shadow-xl p-6 flex flex-col h-full">
+<div class="absolute left-0 top-0 bottom-0 w-1 blade-accent"></div>
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-8 relative">
+<img alt="Suresh Chaudhary" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="Photos/SURESH.png" style="">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-2xl text-primary" style="">Suresh Chaudhary</h3>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="science" style="">science</span>
+</div>
+<p class="label-md font-semibold text-on-surface-variant uppercase tracking-wider mb-4" style="">Chemistry Faculty</p>
+<p class="text-on-surface-variant body-lg leading-relaxed mb-6" style="">Specialized in advanced chemistry concepts with a focus on problem-solving and exam preparation. Passionate about making chemistry accessible and enjoyable for students.</p>
+<div class="mt-auto pt-6 border-t border-surface-container-low flex items-center justify-between">
+<span class="text-sm font-label text-slate-500" style="">6+ Years Exp.</span>
+<div class="flex space-x-3">
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="mail" style="">mail</span>
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="person" style="">person</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Faculty Member: Deepak Jain -->
+<div class="group relative bg-surface-container-lowest rounded-2xl overflow-hidden transition-all duration-300 hover:surface-container shadow-sm hover:shadow-xl p-6 flex flex-col h-full">
+<div class="absolute left-0 top-0 bottom-0 w-1 blade-accent"></div>
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-8 relative">
+<img alt="Deepak Jain" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="Photos/DEEPAK.png" style="">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-2xl text-primary" style="">Deepak Jain</h3>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="calculate" style="">calculate</span>
+</div>
+<p class="label-md font-semibold text-on-surface-variant uppercase tracking-wider mb-4" style="">Maths Faculty</p>
+<p class="text-on-surface-variant body-lg leading-relaxed mb-6" style="">Expert in mathematics with a strong emphasis on algebra, calculus, and geometry. Dedicated to building strong foundational skills for academic and competitive success.</p>
+<div class="mt-auto pt-6 border-t border-surface-container-low flex items-center justify-between">
+<span class="text-sm font-label text-slate-500" style="">9+ Years Exp.</span>
+<div class="flex space-x-3">
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="mail" style="">mail</span>
+<span class="material-symbols-outlined text-primary/60 cursor-pointer hover:text-primary transition-colors" data-icon="person" style="">person</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="mt-24 editorial-gradient rounded-2xl p-12 text-center">
+<h2 class="font-headline font-bold text-3xl md:text-4xl text-on-primary mb-6" style="">Want to meet the faculty?</h2>
+<p class="text-on-primary-container text-lg max-w-2xl mx-auto mb-10" style="">
+                Join our next batch and get mentored by our elite faculty members. We offer personalized attention and a curriculum designed for excellence.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a
+        href="https://wa.me/919079205366?text=Hi%20I%20want%20details%20about%20admission"
+   target="_blank"
+        class="border border-white/40 bg-white/10 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/15 hover:border-white/60 transition-all" style="">Schedule a Consultation</a>
+<a href="Brochure.pdf" download
+   class="bg-primary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform inline-block text-center">
+  Download Brochure
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="text-xl font-black text-blue-900 mb-6" style="">Elementary Science Academy</div>
+<p class="text-slate-500 body-lg" style="">Excellence in scientific education through architectural clarity and dedicated mentorship.</p>
+</div>
+<div>
+<h4 class="label-md uppercase tracking-wider text-blue-900 font-bold mb-6" style="">Links</h4>
+<ul class="space-y-4">
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors" href="courses.html" style="">Courses</a></li>
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors" href="contact.html" style="">Admission Enquiry</a></li>
+<li>
+  <a class="text-slate-500 hover:text-blue-700 transition-colors" href="FAQ.pdf">
+    FAQ
+  </a>
+</li>
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors" href="facilities.html" style="">Facilities</a></li>
+</ul>
+</div>
+<div>
+<h4 class="label-md uppercase tracking-wider text-blue-900 font-bold mb-6" style="">Contact</h4>
+<p class="text-slate-500 body-lg" style="">3rd Floor, Jio Office Building,<br>Near Emmanuel School, Tonk</p>
+<p class="text-slate-500 body-lg mt-4" style=""><a href="mailto:shubham0012.sg@gmail.com?subject=Faculty%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20have%20a%20query%20regarding%20the%20faculty..." class="hover:text-primary transition-colors">shubham0012.sg@gmail.com</a></p>
+</div>
+<div>
+<h4 class="label-md uppercase tracking-wider text-blue-900 font-bold mb-6" style="">Follow Us</h4>
+<div class="flex space-x-6">
+<a href="https://maps.app.goo.gl/QBDrNxPT1iAw7deo6"
+   target="_blank"
+   title="View Location">
+  <span class="material-symbols-outlined text-2xl text-slate-500 hover:text-blue-700 transition-transform hover:scale-110 cursor-pointer">
+    language
+  </span>
+</a>
+        <a href="https://wa.me/?text=Check%20out%20Elementary%20Science%20Academy%20for%20JEE%20NEET%20preparation%20in%20Tonk."
+   target="_blank"
+   title="Share">
+  <span class="material-symbols-outlined text-2xl text-slate-500 hover:text-blue-700 transition-transform hover:scale-110 cursor-pointer">
+    share
+  </span>
+</a>
+<a href="https://wa.me/919079205366?text=Hi%20I%20want%20details%20about%20admission"
+   target="_blank"
+   title="Message on WhatsApp">
+  <span class="material-symbols-outlined text-2xl text-slate-500 hover:text-blue-700 transition-transform hover:scale-110 cursor-pointer">
+    groups
+  </span>
+</a>
+</div>
+</div>
+<div class="border-t border-slate-200 py-8 px-8 text-center">
+<p class="text-slate-500 text-sm" style="">© 2026 Elementary Science Academy. All rights reserved.</p>
+</div>
+</footer>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const activePage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('nav.glass-nav a[href]');
+    const glassNav = document.querySelector('nav.glass-nav');
+    const revealTargets = document.querySelectorAll([
+      'nav.glass-nav > div > *',
+      'body > header > *',
+      'main > section > *',
+      'main > section .grid > *',
+      'main > section .flex > *',
+      'main > section article',
+      'main > section li',
+      'main > section details',
+      'main > section a',
+      'main > section button',
+      'footer > *',
+      'footer .grid > *',
+      'footer .flex > *'
+    ].join(', '));
+    let navTicking = false;
+
+    function syncNavGlass() {
+      glassNav?.classList.toggle('is-scrolled', window.scrollY > 12);
+      navTicking = false;
+    }
+
+    function requestNavGlassSync() {
+      if (navTicking) return;
+      navTicking = true;
+      requestAnimationFrame(syncNavGlass);
+    }
+
+    function setActiveNav() {
+      navLinks.forEach(navLink => {
+        const linkTarget = navLink.getAttribute('href');
+        if (linkTarget === activePage || (activePage === '' && linkTarget === 'index.html')) {
+          navLink.classList.add('text-blue-900', 'font-bold', 'border-blue-900');
+        } else {
+          navLink.classList.remove('text-blue-900', 'font-bold', 'border-blue-900');
+        }
+      });
+    }
+
+    revealTargets.forEach((target, index) => {
+      target.classList.add('load-reveal');
+      target.style.transitionDelay = `${Math.min(index * 20, 180)}ms`;
+    });
+
+    const revealElement = element => element.classList.add('is-visible');
+
+    function runLoadReveal() {
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              revealElement(entry.target);
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -8% 0px'
+        });
+
+        revealTargets.forEach(target => revealObserver.observe(target));
+      } else {
+        requestAnimationFrame(() => {
+          revealTargets.forEach(revealElement);
+        });
+      }
+    }
+
+    if (document.documentElement.classList.contains('fonts-ready')) {
+      runLoadReveal();
+    } else {
+      window.addEventListener('fontsready', runLoadReveal, { once: true });
+    }
+
+    setActiveNav();
+    syncNavGlass();
+    window.addEventListener('scroll', requestNavGlassSync, { passive: true });
+  });
+</script>
+</html>

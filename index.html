@@ -1,0 +1,836 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="theme.js"></script>
+<title>Elementary Science Academy | Excellence in Science Education</title>
+<script>
+  document.documentElement.classList.add('fonts-loading');
+  const revealFonts = () => {
+    document.documentElement.classList.remove('fonts-loading');
+    document.documentElement.classList.add('fonts-ready');
+    window.dispatchEvent(new Event('fontsready'));
+  };
+  if ('fonts' in document) {
+    Promise.race([
+      document.fonts.ready,
+      new Promise(resolve => window.setTimeout(resolve, 1200))
+    ]).then(revealFonts);
+  } else {
+    window.addEventListener('load', revealFonts, { once: true });
+  }
+</script>
+<style>
+  html.fonts-loading body { opacity: 0; }
+  html body { transition: opacity 140ms ease; }
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#bcc7dd",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e5e9eb",
+                        "tertiary-fixed": "#ffddba",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-background": "#181c1e",
+                        "surface-dim": "#d7dadc",
+                        "inverse-on-surface": "#eef1f3",
+                        "surface": "#f7fafc",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#4f2e00",
+                        "tertiary": "#321b00",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#43474e",
+                        "background": "#f7fafc",
+                        "surface-container": "#ebeef0",
+                        "outline-variant": "#c4c6cf",
+                        "on-tertiary-fixed": "#2b1700",
+                        "primary-fixed-dim": "#adc7f7",
+                        "tertiary-fixed-dim": "#f2bc82",
+                        "on-surface": "#181c1e",
+                        "inverse-primary": "#adc7f7",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#111c2c",
+                        "secondary-fixed": "#d8e3fa",
+                        "outline": "#74777f",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "secondary-container": "#d5e0f7",
+                        "surface-tint": "#455f88",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#86a0cd",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7fafc",
+                        "on-tertiary-fixed-variant": "#633f0f",
+                        "on-primary-fixed": "#001b3c",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary": "#545f72",
+                        "primary": "#002045",
+                        "on-secondary-container": "#586377",
+                        "primary-container": "#1a365d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#c6955e",
+                        "surface-container-low": "#f1f4f6",
+                        "on-secondary-fixed-variant": "#3c475a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #002045 0%, #1A365D 100%);
+        }
+        nav.glass-nav {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+            transform: translateZ(0);
+            transition:
+                background-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                -webkit-backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: background-color, border-color, box-shadow, backdrop-filter;
+        }
+
+        nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+        }
+
+        .dark nav.glass-nav {
+            background-color: rgba(15, 23, 42, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.1);
+        }
+
+        .dark nav.glass-nav.is-scrolled {
+            background-color: rgba(15, 23, 42, 0.9);
+            border-bottom-color: rgba(148, 163, 184, 0.1);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark nav.glass-nav .font-headline {
+            color: #d6e3ff;
+        }
+
+        .dark nav.glass-nav .nav-link {
+            color: #eef1f3;
+        }
+
+        .dark nav.glass-nav .nav-link:hover,
+        .dark nav.glass-nav .nav-link.border-blue-900 {
+            color: #adc7f7;
+            border-bottom-color: #adc7f7;
+        }
+
+        /* Comprehensive Dark Mode Overrides for Custom Colors */
+        html.dark body, html.dark .bg-surface, html.dark .bg-slate-50 {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        html.dark .bg-surface-container-lowest, html.dark .bg-surface-container-low {
+            background-color: #1e293b !important;
+        }
+        html.dark .bg-surface-container {
+            background-color: #334155 !important;
+        }
+        html.dark .text-primary, html.dark .text-blue-900 {
+            color: #93c5fd !important;
+        }
+        html.dark .text-on-surface-variant, html.dark .text-slate-500 {
+            color: #cbd5e1 !important;
+        }
+        html.dark .text-on-surface, html.dark .text-on-secondary-container {
+            color: #f1f5f9 !important;
+        }
+        html.dark .border-outline-variant, html.dark .border-slate-200 {
+            border-color: #475569 !important;
+        }
+        html.dark .bg-primary-fixed {
+            background-color: #1e3a8a !important;
+            color: #bfdbfe !important;
+        }
+        html.dark .bg-slate-200, html.dark .bg-surface-container-highest {
+            background-color: #334155 !important;
+        }
+        html.dark .text-tertiary-fixed-dim {
+            color: #fbbf24 !important;
+        }
+        html.dark .editorial-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%) !important;
+        }
+
+        nav.glass-nav > * {
+            position: relative;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        .nav-link {
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            backdrop-filter: saturate(150%) blur(16px);
+            -webkit-backdrop-filter: saturate(150%) blur(16px);
+        }
+
+        @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+            nav.glass-nav {
+                background-color: rgba(255, 255, 255, 0.72);
+            }
+
+            nav.glass-nav.is-scrolled {
+                background-color: rgba(255, 255, 255, 0.94);
+            }
+        }
+
+        nav.glass-nav::before,
+        nav.glass-nav::after {
+            display: none !important;
+            content: none !important;
+        }
+
+
+        /* Page Transition Effects */
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); }
+            to { transform: translateX(100%); }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .load-reveal {
+            opacity: 0;
+            transform: translate3d(0, 14px, 0);
+            filter: blur(10px);
+            transition-property: opacity, transform, filter;
+            transition-duration: 260ms, 260ms, 320ms;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform, filter;
+        }
+        .load-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            filter: blur(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .load-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+<link href="theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 inset-x-0 w-full z-50 glass-nav">
+  <div class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-3 md:py-4 max-w-screen-2xl mx-auto gap-4">
+    <div class="text-lg sm:text-xl md:text-2xl font-black tracking-tighter text-blue-900 dark:text-primary-fixed font-headline uppercase truncate min-w-0">
+      Elementary Science Academy
+    </div>
+    <div class="hidden lg:flex items-center space-x-8">
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="index.html">Home</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="about.html">About Us</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="courses.html">Courses</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="ESAT.html">ESAT</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="faculty.html">Faculty</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="facilities.html">Facilities</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="contact.html">Contact</a>
+    </div>
+    <div class="flex items-center gap-2 sm:gap-3">
+      <button id="theme-toggle" class="p-2 text-slate-700 hover:text-primary transition-colors flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+        <span id="theme-toggle-dark-icon" class="material-symbols-outlined hidden dark:block" data-icon="light_mode">light_mode</span>
+        <span id="theme-toggle-light-icon" class="material-symbols-outlined dark:hidden" data-icon="dark_mode">dark_mode</span>
+      </button>
+      <a href="https://forms.gle/Ps53tca4W1hRnJbM7" class="bg-primary text-on-primary px-4 sm:px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95 whitespace-nowrap flex-shrink-0">
+        Enroll Now
+      </a>
+      <button id="mobile-menu-btn" class="lg:hidden p-2 text-slate-700 hover:text-primary transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined" data-icon="menu" style="">menu</span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" class="lg:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden transition-all duration-300 max-h-0 opacity-0 pointer-events-none">
+    <div class="px-6 py-6 flex flex-col space-y-5">
+      <a class="mobile-nav-link text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-primary-fixed font-label text-lg font-semibold border-b border-slate-100 dark:border-slate-800 pb-2" href="index.html">Home</a>
+      <a class="mobile-nav-link text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-primary-fixed font-label text-lg font-semibold border-b border-slate-100 dark:border-slate-800 pb-2" href="about.html">About Us</a>
+      <a class="mobile-nav-link text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-primary-fixed font-label text-lg font-semibold border-b border-slate-100 dark:border-slate-800 pb-2" href="courses.html">Courses</a>
+      <a class="mobile-nav-link text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-primary-fixed font-label text-lg font-semibold border-b border-slate-100 dark:border-slate-800 pb-2" href="ESAT.html">ESAT</a>
+      <a class="mobile-nav-link text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-primary-fixed font-label text-lg font-semibold border-b border-slate-100 dark:border-slate-800 pb-2" href="faculty.html">Faculty</a>
+      <a class="mobile-nav-link text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-primary-fixed font-label text-lg font-semibold border-b border-slate-100 dark:border-slate-800 pb-2" href="facilities.html">Facilities</a>
+      <a class="mobile-nav-link text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-primary-fixed font-label text-lg font-semibold" href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+<main style="padding-top: var(--home-nav-offset, 6rem);">
+<!-- Hero Section: The Architectural Editorial -->
+<section class="relative overflow-hidden bg-surface py-20 lg:py-32">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 z-10">
+<span class="inline-block px-4 py-1.5 mb-6 rounded-full bg-secondary-container text-on-secondary-container font-label text-xs font-bold uppercase tracking-widest" style="">
+                        Academic Excellence 2024-25
+                    </span>
+<h1 class="text-5xl lg:text-7xl font-extrabold text-primary leading-[1.1] mb-8 tracking-tight" style="">
+                        Where Concepts Build <span class="text-primary-container opacity-80" style="">Confidence</span> &amp; Results Follow
+                    </h1>
+<p class="text-xl text-on-surface-variant mb-10 max-w-xl leading-relaxed" style="">
+                        Coaching for Classes 9–12 | Boards + NEET, JEE, NDA, CUET &amp; Olympiads. Specialized mentorship for tomorrow's leaders.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<a href="https://forms.gle/Ps53tca4W1hRnJbM7"
+        class="editorial-gradient text-on-primary px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all active:scale-95" style="">
+                            Enroll Now
+                        </a>
+<a href="contact.html"
+        class="bg-surface-container text-on-secondary-container px-8 py-4 rounded-xl font-bold text-lg hover:bg-surface-container-high transition-all border border-transparent" style="">
+                            Contact Us
+                        </a>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="relative rounded-2xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+<img alt="Student focused" class="w-full h-[500px] object-cover" data-alt="Modern high school student in a brightly lit library setting focusing on a textbook with soft natural light and academic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUQ_y8obOD5A3g9dhcOd0isr703CEc5vdzdDvv9jhkUYsPWlKZ7_LmPSITzso81tYAgMcL6pQPUWgcR0ZtSDmwJa-VkEpgVS_PVjUVM4Xt4W7bkIkyiOzfZEm_KIiUCAXqbzrOiL5-jbDahELi2CwsKBXKTWnj1kRlPKvOhyY1Qxk27U_6PFbFa3lOL3brsU0aPyT-g-G06o6w5Ypz1FXo5vG2_XnKU2dYUQLxNeU7kFHHBhbLeN3FgMGGFzSxNoWYSsLNAxuo" style="">
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+<!-- Floating Stat Element -->
+<div class="absolute -bottom-6 -left-6 glass-panel p-6 rounded-2xl shadow-xl max-w-[200px]">
+<p class="text-4xl font-extrabold text-primary mb-1" style="">9-12</p>
+<p class="text-sm font-semibold text-on-surface-variant leading-tight" style="">Boards + entrance foundation</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Highlight Section: Feature Bento Grid -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-extrabold text-primary mb-4 tracking-tight" style="">The Academy Edge</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto" style="">Our methodology is designed to provide comprehensive support through every step of the academic journey.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-xl mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="stars" style="">stars</span>
+</div>
+<h3 class="text-xl font-bold text-primary mb-3" style="">Board Exam Mentoring</h3>
+<p class="text-on-surface-variant leading-relaxed" style="">Structured revision, writing practice, and chapter-wise accountability for Classes 9 to 12.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-xl mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="monitoring" style="">monitoring</span>
+</div>
+<h3 class="text-xl font-bold text-primary mb-3" style="">Weekly Tests &amp; Tracking</h3>
+<p class="text-on-surface-variant leading-relaxed" style="">Regular performance monitoring with detailed analytics and parent-teacher updates.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-xl mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="groups" style="">groups</span>
+</div>
+<h3 class="text-xl font-bold text-primary mb-3" style="">Small Batch Personal Mentorship</h3>
+<p class="text-on-surface-variant leading-relaxed" style="">Maintaining focused student-teacher ratios to ensure no question goes unanswered.</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-xl mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="campaign" style="">campaign</span>
+</div>
+<h3 class="text-xl font-bold text-primary mb-3" style="">Frequent Motivating Seminars</h3>
+<p class="text-on-surface-variant leading-relaxed" style="">Industry expert sessions to keep students inspired and mentally prepared for exams.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Top Performers: Editorial Profiles -->
+<section class="py-24 bg-surface relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-xl">
+<h2 class="text-4xl font-extrabold text-primary mb-4 tracking-tight" style="">Hall of Fame</h2>
+<p class="text-on-surface-variant leading-relaxed" style="">Celebrating the discipline and dedication of our top achievers who turned their dreams into reality.</p>
+</div>
+<div class="flex gap-2">
+<button id="slider-prev" class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-colors" style="">
+<span class="material-symbols-outlined" data-icon="arrow_back" style="">arrow_back</span>
+</button>
+<button id="slider-next" class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-colors" style="">
+<span class="material-symbols-outlined" data-icon="arrow_forward" style="">arrow_forward</span>
+</button>
+</div>
+</div>
+<div id="hall-of-fame-slider" class="flex overflow-x-auto gap-8 snap-x snap-mandatory pb-8 hide-scrollbar scroll-smooth">
+<!-- Performer 1 -->
+<div class="group cursor-pointer flex-shrink-0 snap-start w-[85vw] sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
+<div class="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 bg-slate-200">
+<img alt="Mudit Sharma" class="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" data-alt="Professional portrait of a confident young male student wearing a crisp white shirt, clean background, editorial photography style" src="Photos/MUDIT.png" style="">
+<div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-primary/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform">
+<p class="text-white font-bold text-lg" style="">JEE MAIN 98%ile</p>
+</div>
+</div>
+<h4 class="text-xl font-bold text-primary group-hover:text-surface-tint transition-colors" style="">Mudit Sharma</h4>
+<p class="text-on-surface-variant text-sm font-label font-semibold" style="">NIT SURAT</p>
+</div>
+<!-- Performer 2 -->
+<div class="group cursor-pointer flex-shrink-0 snap-start w-[85vw] sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
+<div class="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 bg-slate-200">
+<img alt="Amar Gupta" class="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" data-alt="A focused young man in academic environment, wearing glasses, sharp look, editorial portrait lighting" src="Photos/AMAR.png" style="">
+<div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-primary/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform">
+<p class="text-white font-bold text-lg" style="">IIT-JAM AIR 247</p>
+</div>
+</div>
+<h4 class="text-xl font-bold text-primary group-hover:text-surface-tint transition-colors" style="">Amar Gupta</h4>
+<p class="text-on-surface-variant text-sm font-label font-semibold" style="">IIT-JAM AIR 247</p>
+</div>
+<!-- Performer 3 -->
+<div class="group cursor-pointer flex-shrink-0 snap-start w-[85vw] sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
+<div class="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 bg-slate-200">
+<img alt="Akshita Gupta" class="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" data-alt="Young professional woman smiling slightly, bright outdoor academic setting, high quality editorial portrait" src="Photos/AKSHITA.png" style="">
+<div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-primary/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform">
+<p class="text-white font-bold text-lg" style="">CU Kishangarh</p>
+</div>
+</div>
+<h4 class="text-xl font-bold text-primary group-hover:text-surface-tint transition-colors" style="">Akshita Gupta</h4>
+<p class="text-on-surface-variant text-sm font-label font-semibold" style="">CU Kishangarh</p>
+</div>
+<!-- Performer 4 -->
+<div class="group cursor-pointer flex-shrink-0 snap-start w-[85vw] sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]">
+<div class="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 bg-slate-200">
+<img alt="Haya Fatima" class="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" data-alt="Confident young female student looking at camera, library background, soft bokeh, professional lighting" src="Photos/HAYA.png" style="">
+<div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-primary/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform">
+<p class="text-white font-bold text-lg" style="">97% - CBSE</p>
+</div>
+</div>
+<h4 class="text-xl font-bold text-primary group-hover:text-surface-tint transition-colors" style="">Haya Fatima</h4>
+<p class="text-on-surface-variant text-sm font-label font-semibold" style="">District Topper in 12th Boards</p>
+</div>
+</div>
+</div>
+<!-- Abstract background element -->
+<div class="absolute top-1/2 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2"></div>
+</section>
+<!-- Academic Programs: Asymmetric Layout -->
+<section class="py-24 bg-surface-container">
+<div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+<div class="order-2 lg:order-1 grid grid-cols-2 gap-4">
+<div class="space-y-4">
+<div class="h-64 rounded-2xl overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" data-alt="Laboratory equipment, microscope and test tubes in a clean scientific environment with cool blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd9qOGzvOwwNjC0mfswnMD7owo6N98NHCEuTKhnFevUnH3JnLCC5Y0KqRAKRakmfLoFgS_EtR9t-FxUYsvg1peFkRZ0ZEUUVAsJ1rEpqmX6DXgyjbOBeSbNH8WhUm6TIRFR2knsSdALIS-Ndx877RhVkkD0P3FSiAwV-_L-AMhZpM-GFbaxk77M-iQgVkm-uUAcfS3xEAeuO-0N6Xv4He210J2o8PBrWPGo8AluI2Ab-f-AN0ODFRpPrH_GrtM2Z2rRraZvuL6" style="">
+</div>
+<div class="h-48 bg-primary editorial-gradient rounded-2xl p-6 text-white flex flex-col justify-end"><span class="material-symbols-outlined text-4xl mb-4" data-icon="present_to_all" style="">present_to_all</span><h4 class="font-bold text-lg" style="">Smart Board Classrooms</h4></div>
+</div>
+<div class="space-y-4 pt-12">
+<div class="h-48 bg-secondary-container rounded-2xl p-6 text-on-secondary-container flex flex-col justify-end"><span class="material-symbols-outlined text-4xl mb-4" data-icon="library_books" style="">library_books</span><h4 class="font-bold text-lg" style="">Comprehensive Study Material</h4></div>
+<div class="h-64 rounded-2xl overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" data-alt="Student desk with open books, laptop, and notebook in a bright focused study area" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZhTmO92K_dW9CuyBKHm0VkM8V5-nj0dMMuS46RpFoJPkFIGAZDgFmb1JDo51E4oM2Pf5X4XRmThKJh8kVMhGNUwpAstz10nILmZAcICe1wfOFYqS1EANLFiaoh1weLJ7TPnKl1u9zqFxJeENbcV_i-IeM6xlAmO_ioVyazyBCGMg2CMJQb62r27iWYDqNYns0lss_ruQgTWrWjd5VR5_r5gcTxcZrtfJX8Ai_Iw7RXW2qUv5AMVLHR_nt0saeUuGiX1DpX1Jz" style="">
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="text-4xl lg:text-5xl font-extrabold text-primary mb-8 tracking-tight" style="">Scientifically Structured Curriculum</h2>
+<div class="space-y-8">
+<div class="flex gap-6">
+<div class="shrink-0 w-1 bg-gradient-to-b from-primary-fixed to-primary rounded-full"></div>
+<div>
+<h4 class="text-xl font-bold text-primary mb-2" style="">Foundation Building (Classes 9-10)</h4>
+<p class="text-on-surface-variant leading-relaxed" style="">Strengthening core concepts in Physics, Chemistry, and Mathematics to prepare for future competitive exams.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="shrink-0 w-1 bg-gradient-to-b from-primary-fixed to-primary rounded-full"></div>
+<div>
+<h4 class="text-xl font-bold text-primary mb-2" style="">Advanced Preparations (Classes 11-12)</h4>
+<p class="text-on-surface-variant leading-relaxed" style="">In-depth specialized coaching for board exams integrated with JEE, NEET, and NDA preparations.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="shrink-0 w-1 bg-gradient-to-b from-primary-fixed to-primary rounded-full"></div>
+<div>
+<h4 class="text-xl font-bold text-primary mb-2" style="">Competitive Edge (CUET &amp; Olympiads)</h4>
+<p class="text-on-surface-variant leading-relaxed" style="">Specific crash courses and test series focused on maximizing percentile and national rankings.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Learning System Section -->
+<section class="py-24 bg-surface-container-lowest overflow-hidden">
+<div class="max-w-7xl mx-auto px-8">
+    <div class="text-center mb-16">
+        <h2 class="text-4xl font-extrabold text-primary mb-4 tracking-tight">How We Keep Students on Track</h2>
+        <p class="text-on-surface-variant max-w-2xl mx-auto">Clear routines, regular feedback, and parent communication make the learning process easier to follow.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-surface-container-low p-8 rounded-3xl relative">
+            <span class="material-symbols-outlined text-primary text-4xl mb-6 block" data-icon="assignment">assignment</span>
+            <h3 class="font-bold text-primary text-xl mb-4">Weekly Practice Cycle</h3>
+            <p class="text-on-surface-variant leading-relaxed">Students revise concepts, solve sheets, and take regular tests so weak chapters are found early instead of near exams.</p>
+        </div>
+        <div class="bg-surface-container-low p-8 rounded-3xl relative translate-y-0 md:translate-y-8">
+            <span class="material-symbols-outlined text-primary text-4xl mb-6 block" data-icon="psychology">psychology</span>
+            <h3 class="font-bold text-primary text-xl mb-4">Doubt-First Teaching</h3>
+            <p class="text-on-surface-variant leading-relaxed">Small batches give students room to ask questions, repeat fundamentals, and learn without hiding confusion.</p>
+        </div>
+        <div class="bg-surface-container-low p-8 rounded-3xl relative">
+            <span class="material-symbols-outlined text-primary text-4xl mb-6 block" data-icon="diversity_3">diversity_3</span>
+            <h3 class="font-bold text-primary text-xl mb-4">Parent Updates</h3>
+            <p class="text-on-surface-variant leading-relaxed">Progress conversations help families understand attendance, test performance, and the next academic priority.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Final CTA: The Focused Canvas -->
+<section class="py-24 px-8">
+<div class="max-w-5xl mx-auto editorial-gradient rounded-2xl p-12 lg:p-20 text-center relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-4xl lg:text-6xl font-extrabold text-white mb-8 tracking-tight" style="">Ready to excel?</h2>
+<p class="text-white/80 text-xl mb-12 max-w-2xl mx-auto font-body" style="">Talk to us about the right batch for Class 9, 10, 11, 12, JEE, NEET, NDA, CUET, or Olympiad preparation.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<a href="https://wa.me/919079205366?text=Hello%20I%20am%20interested%20in%20joining%20Elementary%20Science%20Academy.%20Please%20help%20me%20book%20a%20demo%20class."
+   target="_blank"
+   class="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-surface-container-low transition-all">
+   Book a Demo Class
+</a>
+<a href="Brochure.pdf"
+        class="bg-transparent text-white border-2 border-white/30 px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all" style="">Download Brochure</a>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
+</div>
+</section>
+
+<!-- FAQ Accordion Section -->
+<section class="py-24 bg-surface">
+<div class="max-w-3xl mx-auto px-8">
+    <div class="text-center mb-16">
+        <h2 class="text-4xl font-extrabold text-primary mb-4 tracking-tight">Frequently Asked Questions</h2>
+        <p class="text-on-surface-variant">Find answers to common questions about our courses and admission process.</p>
+    </div>
+    <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <details class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/30 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-primary font-bold">
+                <h3 class="text-lg">What are the admission criteria for ESAT?</h3>
+                <span class="shrink-0 rounded-full bg-surface-container p-1.5 text-primary group-open:-rotate-180 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+                </span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+                <p>Admission is based on past academic performance and an introductory counseling session. For certain advanced batches, students may be required to take our Elementary Science Aptitude Test (ESAT).</p>
+            </div>
+        </details>
+        <!-- FAQ 2 -->
+        <details class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/30 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-primary font-bold">
+                <h3 class="text-lg">Do you provide study materials?</h3>
+                <span class="shrink-0 rounded-full bg-surface-container p-1.5 text-primary group-open:-rotate-180 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+                </span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+                <p>Yes, comprehensive and updated study material is provided for all courses, covering board exams as well as competitive exams like JEE, NEET, and NDA.</p>
+            </div>
+        </details>
+        <!-- FAQ 3 -->
+        <details class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/30 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-primary font-bold">
+                <h3 class="text-lg">What is the student-to-teacher ratio?</h3>
+                <span class="shrink-0 rounded-full bg-surface-container p-1.5 text-primary group-open:-rotate-180 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+                </span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+                <p>We believe in personal mentorship and maintain a small batch size, typically not exceeding 30 students per batch, ensuring every student gets individual attention.</p>
+            </div>
+        </details>
+        <!-- FAQ 4 -->
+        <details class="group bg-surface-container-lowest rounded-2xl border border-outline-variant/30 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-primary font-bold">
+                <h3 class="text-lg">Are there demo classes available?</h3>
+                <span class="shrink-0 rounded-full bg-surface-container p-1.5 text-primary group-open:-rotate-180 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+                </span>
+            </summary>
+            <div class="px-6 pb-6 text-on-surface-variant leading-relaxed">
+                <p>Demo classes and counselling slots are available by appointment. Call or message us on WhatsApp to confirm the next available time.</p>
+            </div>
+        </details>
+    </div>
+</div>
+</section>
+</main>
+<!-- Editorial Footer -->
+<footer class="bg-slate-50 border-t-0 py-16 px-8">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="md:col-span-1">
+<div class="text-xl font-black text-blue-900 mb-6" style="">
+                    Elementary Science Academy
+                </div>
+<p class="text-slate-500 mb-6 text-sm leading-relaxed" style="">
+                    Empowering students with conceptual clarity and a result-oriented approach to science education.
+                </p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-primary hover:scale-110 transition-transform" href="https://maps.google.com/?q=Elementary+Science+Academy+Tonk" target="_blank" rel="noopener noreferrer" style="">
+<span class="material-symbols-outlined text-sm" data-icon="location_on" style="">location_on</span>
+</a>
+<a class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-primary hover:scale-110 transition-transform" href="mailto:shubham0012.sg@gmail.com?subject=General%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20have%20a%20general%20query%20regarding..." style="">
+<span class="material-symbols-outlined text-sm" data-icon="mail" style="">mail</span>
+</a>
+</div>
+</div>
+<div>
+<h5 class="text-blue-900 font-bold mb-6 font-label uppercase tracking-wider text-xs" style="">Quick Links</h5>
+<ul class="space-y-4">
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors text-sm" href="courses.html" style="">Courses Offered</a></li>
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors text-sm" href="contact.html" style="">Admission Enquiry</a></li>
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors text-sm" href="faculty.html" style="">Faculty</a></li>
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors text-sm" href="FAQ.pdf" style="">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-blue-900 font-bold mb-6 font-label uppercase tracking-wider text-xs" style="">Need Help?</h5>
+<ul class="space-y-4">
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors text-sm" href="tel:+919079205366" style="">Call: +91 90792 05366</a></li>
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors text-sm" href="tel:+918905220266" style="">Call: +91 89052 20266</a></li>
+<li class="" style=""><a class="text-slate-500 hover:text-blue-700 transition-colors text-sm" href="mailto:shubham0012.sg@gmail.com?subject=Help%20and%20Support&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20need%20help%20with..." style="">Email Us</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-blue-900 font-bold mb-6 font-label uppercase tracking-wider text-xs" style="">Campus Info</h5>
+<p class="text-slate-500 text-sm mb-4 leading-relaxed" style="">
+                    3rd Floor, Jio Office Building,<br>
+                    Near Emmanuel School, Tonk
+                </p>
+<p class="text-slate-500 text-sm mb-2" style=""><a href="mailto:shubham0012.sg@gmail.com?subject=Campus%20Info%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20have%20a%20query%20about%20your%20campus..." class="hover:text-blue-700 transition-colors">shubham0012.sg@gmail.com</a></p>
+<p class="text-blue-900 font-bold text-sm" style="">+91 90792 05366</p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-16 border-t border-slate-200 mt-16 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-slate-400 text-xs font-label uppercase tracking-widest" style="">
+                © 2026 Elementary Science Academy. All rights reserved.
+            </p>
+<div class="flex gap-8">
+<span class="text-slate-400 text-xs font-label uppercase tracking-widest" style="">Designed for Excellence</span>
+<span class="text-slate-400 text-xs font-label uppercase tracking-widest" style="">Tonk, Rajasthan</span>
+</div>
+</div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919079205366?text=Hello%20I%20am%20interested%20in%20joining%20Elementary%20Science%20Academy.%20Please%20help%20me." target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-green-600 transition-all z-50 group">
+    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+    <div class="absolute right-16 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm font-semibold px-3 py-1.5 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+        Chat with us
+    </div>
+</a>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const activePage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('nav.glass-nav a[href]');
+    const glassNav = document.querySelector('nav.glass-nav');
+    const revealTargets = document.querySelectorAll([
+      'nav.glass-nav > div > *',
+      'body > header > *',
+      'main > section > *',
+      'main > section .grid > *',
+      'main > section .flex > *',
+      'main > section article',
+      'main > section li',
+      'main > section details',
+      'main > section a',
+      'main > section button',
+      'footer > *',
+      'footer .grid > *',
+      'footer .flex > *'
+    ].join(', '));
+    let navTicking = false;
+
+    function syncHomeNavOffset() {
+      if (!glassNav) return;
+      document.documentElement.style.setProperty('--home-nav-offset', `${glassNav.offsetHeight + 16}px`);
+    }
+
+    function syncNavGlass() {
+      glassNav?.classList.toggle('is-scrolled', window.scrollY > 12);
+      navTicking = false;
+    }
+
+    function requestNavGlassSync() {
+      if (navTicking) return;
+      navTicking = true;
+      requestAnimationFrame(syncNavGlass);
+    }
+
+    function setActiveNav() {
+      navLinks.forEach(navLink => {
+        const linkTarget = navLink.getAttribute('href');
+        if (linkTarget === activePage || (activePage === '' && linkTarget === 'index.html')) {
+          navLink.classList.add('text-blue-900', 'font-bold', 'border-blue-900');
+        } else {
+          navLink.classList.remove('text-blue-900', 'font-bold', 'border-blue-900');
+        }
+      });
+    }
+
+    revealTargets.forEach((target, index) => {
+      target.classList.add('load-reveal');
+      target.style.transitionDelay = `${Math.min(index * 20, 180)}ms`;
+    });
+
+    const revealElement = element => element.classList.add('is-visible');
+
+    function runLoadReveal() {
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              revealElement(entry.target);
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -8% 0px'
+        });
+
+        revealTargets.forEach(target => revealObserver.observe(target));
+      } else {
+        requestAnimationFrame(() => {
+          revealTargets.forEach(revealElement);
+        });
+      }
+    }
+
+    if (document.documentElement.classList.contains('fonts-ready')) {
+      runLoadReveal();
+    } else {
+      window.addEventListener('fontsready', runLoadReveal, { once: true });
+    }
+
+    setActiveNav();
+    syncHomeNavOffset();
+    syncNavGlass();
+    window.addEventListener('resize', syncHomeNavOffset, { passive: true });
+    if ('ResizeObserver' in window && glassNav) {
+      new ResizeObserver(syncHomeNavOffset).observe(glassNav);
+    }
+    window.addEventListener('scroll', requestNavGlassSync, { passive: true });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = mobileMenuBtn?.querySelector('.material-symbols-outlined');
+    let isMobileMenuOpen = false;
+
+    if (mobileMenuBtn && mobileMenu && menuIcon) {
+      mobileMenuBtn.addEventListener('click', () => {
+        isMobileMenuOpen = !isMobileMenuOpen;
+        if (isMobileMenuOpen) {
+          mobileMenu.classList.remove('max-h-0', 'opacity-0', 'pointer-events-none');
+          mobileMenu.classList.add('max-h-[500px]', 'opacity-100', 'pointer-events-auto');
+          menuIcon.textContent = 'close';
+        } else {
+          mobileMenu.classList.add('max-h-0', 'opacity-0', 'pointer-events-none');
+          mobileMenu.classList.remove('max-h-[500px]', 'opacity-100', 'pointer-events-auto');
+          menuIcon.textContent = 'menu';
+        }
+      });
+    }
+
+    // Set Active Mobile Nav
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(navLink => {
+      const linkTarget = navLink.getAttribute('href');
+      if (linkTarget === activePage || (activePage === '' && linkTarget === 'index.html')) {
+        navLink.classList.add('text-blue-900', 'font-black');
+      }
+    });
+
+    // Slider Logic
+    const sliderPrev = document.getElementById('slider-prev');
+    const sliderNext = document.getElementById('slider-next');
+    const slider = document.getElementById('hall-of-fame-slider');
+
+    if (sliderPrev && sliderNext && slider) {
+        const getScrollAmount = () => {
+            const item = slider.querySelector('.group');
+            return item ? item.clientWidth + 32 : slider.clientWidth; // 32 is the gap-8
+        };
+        sliderPrev.addEventListener('click', () => {
+            slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+        sliderNext.addEventListener('click', () => {
+            slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
+    }
+
+  });
+</script>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="theme.js"></script>
+<script>
+  document.documentElement.classList.add('fonts-loading');
+  const revealFonts = () => {
+    document.documentElement.classList.remove('fonts-loading');
+    document.documentElement.classList.add('fonts-ready');
+    window.dispatchEvent(new Event('fontsready'));
+  };
+  if ('fonts' in document) {
+    Promise.race([
+      document.fonts.ready,
+      new Promise(resolve => window.setTimeout(resolve, 1200))
+    ]).then(revealFonts);
+  } else {
+    window.addEventListener('load', revealFonts, { once: true });
+  }
+</script>
+<style>
+  html.fonts-loading body { opacity: 0; }
+  html body { transition: opacity 140ms ease; }
+</style>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#bcc7dd",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e5e9eb",
+                    "tertiary-fixed": "#ffddba",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "on-background": "#181c1e",
+                    "surface-dim": "#d7dadc",
+                    "inverse-on-surface": "#eef1f3",
+                    "surface": "#f7fafc",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#4f2e00",
+                    "tertiary": "#321b00",
+                    "inverse-surface": "#2d3133",
+                    "on-surface-variant": "#43474e",
+                    "background": "#f7fafc",
+                    "surface-container": "#ebeef0",
+                    "outline-variant": "#c4c6cf",
+                    "on-tertiary-fixed": "#2b1700",
+                    "primary-fixed-dim": "#adc7f7",
+                    "tertiary-fixed-dim": "#f2bc82",
+                    "on-surface": "#181c1e",
+                    "inverse-primary": "#adc7f7",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#111c2c",
+                    "secondary-fixed": "#d8e3fa",
+                    "outline": "#74777f",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e0e3e5",
+                    "secondary-container": "#d5e0f7",
+                    "surface-tint": "#455f88",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#86a0cd",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-bright": "#f7fafc",
+                    "on-tertiary-fixed-variant": "#633f0f",
+                    "on-primary-fixed": "#001b3c",
+                    "primary-fixed": "#d6e3ff",
+                    "secondary": "#545f72",
+                    "primary": "#002045",
+                    "on-secondary-container": "#586377",
+                    "primary-container": "#1a365d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#c6955e",
+                    "surface-container-low": "#f1f4f6",
+                    "on-secondary-fixed-variant": "#3c475a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blade-accent {
+            background: linear-gradient(to bottom, #d6e3ff, #002045);
+        }
+        nav.glass-nav {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+            transform: translateZ(0);
+            transition:
+                background-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                -webkit-backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: background-color, border-color, box-shadow, backdrop-filter;
+        }
+
+        nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+        }
+
+        .dark nav.glass-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+        }
+
+        .dark nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .dark nav.glass-nav .font-headline {
+            color: #d6e3ff;
+        }
+
+        .dark nav.glass-nav .nav-link {
+            color: #eef1f3;
+        }
+
+        .dark nav.glass-nav .nav-link:hover,
+        .dark nav.glass-nav .nav-link.border-blue-900 {
+            color: #adc7f7;
+            border-bottom-color: #adc7f7;
+        }
+
+        nav.glass-nav > * {
+            position: relative;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        .nav-link {
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            backdrop-filter: saturate(150%) blur(16px);
+            -webkit-backdrop-filter: saturate(150%) blur(16px);
+        }
+
+        @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+            nav.glass-nav {
+                background-color: rgba(255, 255, 255, 0.72);
+            }
+
+            nav.glass-nav.is-scrolled {
+                background-color: rgba(255, 255, 255, 0.94);
+            }
+        }
+
+        nav.glass-nav::before,
+        nav.glass-nav::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #002045 0%, #1A365D 100%);
+        }
+        /* Page Transition Effects */
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); }
+            to { transform: translateX(100%); }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+    <style>
+        .load-reveal {
+            opacity: 0;
+            transform: translate3d(0, 14px, 0);
+            filter: blur(10px);
+            transition-property: opacity, transform, filter;
+            transition-duration: 260ms, 260ms, 320ms;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform, filter;
+        }
+        .load-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            filter: blur(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .load-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+<link href="theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 inset-x-0 w-full z-50 glass-nav">
+  <div class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-3 md:py-4 max-w-screen-2xl mx-auto gap-4">
+    <div class="text-lg sm:text-xl md:text-2xl font-black tracking-tighter text-blue-900 font-headline uppercase truncate min-w-0">
+      Elementary Science Academy
+    </div>
+    <div class="hidden lg:flex items-center space-x-8">
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="index.html">Home</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="about.html">About Us</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="courses.html">Courses</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="ESAT.html">ESAT</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="faculty.html">Faculty</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="facilities.html">Facilities</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="contact.html">Contact</a>
+    </div>
+    <a href="https://forms.gle/Ps53tca4W1hRnJbM7" class="bg-primary text-on-primary px-4 sm:px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95 whitespace-nowrap flex-shrink-0">
+      Enroll Now
+    </a>
+  </div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="px-8 py-20 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<span class="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider uppercase bg-secondary-container text-on-secondary-container rounded-full label-md">Smart Board Enabled Learning</span>
+<h1 class="text-5xl lg:text-7xl font-extrabold font-headline text-primary tracking-tight leading-tight mb-8">
+                        Architecture of <br/><span class="text-primary-container">Academic Excellence</span>
+</h1>
+<p class="text-xl text-on-surface-variant leading-relaxed max-w-2xl font-body">
+                        We believe that the environment is the third teacher. Our academy is designed to foster scientific curiosity through cutting-edge facilities and a meticulously structured support system.
+                    </p>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-square rounded-[3rem] overflow-hidden shadow-2xl rotate-3 bg-surface-container-high">
+<img alt="Interactive Smart Board Classroom" class="w-full h-full object-cover" data-alt="A modern, high-tech classroom featuring interactive smart boards, ergonomic seating, and advanced digital teaching tools designed for an engaging learning experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdi698XdT5HhEyTpuLT9SuyKrL1jgHzvOokDIW-lEdg6wDQCFy-kjEWrT-5uUY3FdZNvy4cjNup6eNSKunmiOYEwH6wW2viNxeV0wIcLzlghcoz6zw4iE-Iykk9cwfWK_zD2q_AktVhqASOiaX-e0hgHGzOc95hZk21NJ3mPoYotIA5CCHSQ_-5nIq0ONOzoviMMz0iII25ShNT2OSxsOdJ_vrayJXdbMrf3aIfzMbs-7AptML6blhj3kMcS-W13dRg4tDpaGG"/>
+</div>
+<div class="absolute -bottom-6 -left-6 p-8 bg-surface-container-lowest rounded-2xl shadow-xl max-w-xs -rotate-3 border border-outline-variant/15">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-bold font-headline text-primary">Scientifically Structured</span>
+</div>
+<p class="text-sm text-on-surface-variant">Our system is built on proven pedagogical frameworks to maximize student retention.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Facilities Bento Grid -->
+<section class="bg-surface-container-low py-24">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-16">
+<h2 class="text-3xl font-bold font-headline text-primary mb-4">Core Facilities</h2>
+<div class="h-1 w-20 bg-primary rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Feature: Smart Board Enabled -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 rounded-2xl shadow-sm flex flex-col justify-between border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1.5 h-full blade-accent"></div>
+<div>
+<div class="w-12 h-12 bg-primary-container rounded-xl flex items-center justify-center mb-6 text-on-primary">
+<span class="material-symbols-outlined" data-icon="interactive_space">interactive_space</span>
+</div>
+<h3 class="text-2xl font-bold font-headline text-primary mb-4">Smart Board Enabled Classrooms</h3>
+<p class="text-on-surface-variant leading-relaxed">Experience learning in high-definition with interactive digital boards that make complex scientific concepts visual and engaging.</p>
+</div>
+<div class="mt-12 flex gap-4">
+<span class="text-xs font-semibold px-3 py-1 bg-surface-container rounded-full text-secondary">Visual Learning</span>
+<span class="text-xs font-semibold px-3 py-1 bg-surface-container rounded-full text-secondary">Interactive</span>
+</div>
+</div>
+<!-- Feature: Small Batch Size -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1.5 h-full blade-accent"></div>
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-6 text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<h3 class="text-xl font-bold font-headline text-primary mb-3">Small Batch Size</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Controlled student-to-teacher ratios ensuring every voice is heard and every question is answered.</p>
+</div>
+<!-- Feature: Personal Mentorship -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/10 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full blade-accent"></div>
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-6 text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="person_celebrate">person_celebrate</span>
+</div>
+<h3 class="text-xl font-bold font-headline text-primary mb-3">Personal Mentorship</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Dedicated mentors to guide academic journeys, manage stress, and track individual progress.</p>
+</div>
+<!-- Feature: Study Material -->
+<div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/10 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full blade-accent"></div>
+<div class="flex flex-col md:flex-row gap-8">
+<div class="flex-1">
+<div class="w-12 h-12 bg-primary-container rounded-xl flex items-center justify-center mb-6 text-on-primary">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+</div>
+<h3 class="text-2xl font-bold font-headline text-primary mb-4">Comprehensive Study Material</h3>
+<p class="text-on-surface-variant leading-relaxed">Curated content including Detailed Notes, Daily Practice Problems (DPPs), Practice Sheets, and Previous Year Questions (PYQs).</p>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-4 rounded-xl text-center">
+<p class="font-bold text-primary">Notes</p>
+<p class="text-xs text-on-surface-variant">Conceptual</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl text-center">
+<p class="font-bold text-primary">DPPs</p>
+<p class="text-xs text-on-surface-variant">Daily Rigor</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl text-center">
+<p class="font-bold text-primary">Practice</p>
+<p class="text-xs text-on-surface-variant">Skill Sheets</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl text-center">
+<p class="font-bold text-primary">PYQs</p>
+<p class="text-xs text-on-surface-variant">Exam Ready</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature: Open Classroom -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/10 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full blade-accent"></div>
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-6 text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="door_open">door_open</span>
+</div>
+<h3 class="text-xl font-bold font-headline text-primary mb-3">Open Classroom Option</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Flexible study spaces that encourage collaborative learning and peer-to-peer knowledge sharing.</p>
+</div>
+<!-- Feature: Doubt Solving -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/10 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full blade-accent"></div>
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-6 text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+</div>
+<h3 class="text-xl font-bold font-headline text-primary mb-3">Doubt Solving Sessions</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Specific slots dedicated to clearing conceptual hurdles with subject matter experts.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Academic System Section -->
+<section class="py-24 px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="order-2 lg:order-1">
+<div class="bg-surface-container-lowest p-10 rounded-[2rem] shadow-xl border border-outline-variant/10 relative">
+<h3 class="text-3xl font-bold font-headline text-primary mb-10">The Performance Engine</h3>
+<div class="space-y-12">
+<div class="flex gap-6">
+<div class="flex-none w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">1</div>
+<div>
+<h4 class="text-xl font-bold text-primary mb-2">Weekly Assessment Tests</h4>
+<p class="text-on-surface-variant">Regular testing cycles that mirror competitive exam patterns to build stamina and accuracy.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-none w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">2</div>
+<div>
+<h4 class="text-xl font-bold text-primary mb-2">Performance Analysis</h4>
+<p class="text-on-surface-variant">Detailed diagnostic reports tracking speed, accuracy, and topic-wise proficiency for every student.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-none w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">3</div>
+<div>
+<h4 class="text-xl font-bold text-primary mb-2">Adaptive Feedback Loop</h4>
+<p class="text-on-surface-variant">Curriculum adjustments based on batch performance to ensure no student is left behind.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="text-4xl lg:text-5xl font-extrabold font-headline text-primary leading-tight mb-8">Systematic Progress, <br/>Data-Driven Success.</h2>
+<p class="text-lg text-on-surface-variant mb-10">We don't just teach; we track. Our system converts effort into measurable outcomes using a scientific approach to assessment.</p>
+<div class="bg-primary-container p-8 rounded-2xl text-on-primary flex items-center justify-between">
+<div>
+<p class="text-3xl font-bold">Weekly</p>
+<p class="text-sm opacity-80">Assessment Cycle</p>
+</div>
+<div class="h-12 w-px bg-on-primary/20"></div>
+<div>
+<p class="text-3xl font-bold">Small</p>
+<p class="text-sm opacity-80">Focused Batches</p>
+</div>
+<div class="h-12 w-px bg-on-primary/20"></div>
+<div>
+<p class="text-3xl font-bold">Regular</p>
+<p class="text-sm opacity-80">Doubt Sessions</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="hero-gradient rounded-[3rem] p-12 lg:p-20 text-center text-on-primary relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-4xl lg:text-6xl font-extrabold font-headline mb-8">Ready to transform your <br/>scientific journey?</h2>
+<p class="text-xl opacity-90 mb-12 max-w-2xl mx-auto">Book a campus tour or attend a demo session to experience our facilities firsthand.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="https://wa.me/919079205366?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20Elementary%20Science%20Academy.%20Please%20share%20available%20time%20slots."
+   target="_blank"
+   class="bg-green-500 text-white px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all inline-block text-center">
+   Book Appointment
+</a>
+<a href="Brochure.pdf" download
+   class="bg-primary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform inline-block text-center">
+  Download Brochure
+</a>
+</div>
+</div>
+<!-- Decorative elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-primary-fixed-dim/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t-0">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="text-xl font-black text-blue-900 mb-6">Elementary Science Academy</div>
+<p class="text-slate-500 text-sm leading-relaxed">Empowering the next generation of scientists and thinkers through architectural excellence in education.</p>
+</div>
+<div>
+<h4 class="label-md uppercase tracking-wider text-blue-900 font-bold mb-6">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="courses.html">Courses</a></li>
+<li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="contact.html">Admission Enquiry</a></li>
+<li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="FAQ.pdf">FAQ</a></li>
+<li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="faculty.html">Faculty</a></li>
+</ul>
+</div>
+<div>
+<h4 class="label-md uppercase tracking-wider text-blue-900 font-bold mb-6">Contact Us</h4>
+<ul class="space-y-4 text-slate-500 text-sm">
+<li class="flex items-center gap-2">
+  <span class="material-symbols-outlined text-sm">location_on</span>
+  <a href="https://maps.google.com/?q=Elementary+Science+Academy+Tonk"
+     target="_blank"
+     class="hover:text-blue-700 transition-colors">
+     3rd Floor, Jio Office Building, Near Emmanuel School, Tonk
+  </a>
+</li>
+
+<li class="flex items-center gap-2">
+  <span class="material-symbols-outlined text-sm">mail</span>
+  <a href="mailto:shubham0012.sg@gmail.com?subject=Facilities%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20have%20a%20query%20about%20your%20campus%20and%20facilities..."
+     class="hover:text-blue-700 transition-colors">
+     shubham0012.sg@gmail.com
+  </a>
+</li>
+
+<li class="flex items-center gap-2">
+  <span class="material-symbols-outlined text-sm">phone</span>
+  <a href="tel:+919079205366"
+     class="hover:text-blue-700 transition-colors">
+     +91 9079205366
+  </a>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="label-md uppercase tracking-wider text-blue-900 font-bold mb-6">
+  Social Media
+</h4>
+
+<div class="flex gap-4">
+
+  <!-- Share (WhatsApp share) -->
+  <a href="https://wa.me/?text=Check%20out%20Elementary%20Science%20Academy%20for%20JEE%20NEET%20preparation%20in%20Tonk."
+     target="_blank"
+     class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer text-primary">
+    <span class="material-symbols-outlined">share</span>
+  </a>
+
+  <!-- Website / Map -->
+  <a href="https://maps.google.com/?q=Elementary+Science+Academy+Tonk"
+     target="_blank"
+     class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center hover:scale-110 transition-transform cursor-pointer text-primary">
+    <span class="material-symbols-outlined">public</span>
+  </a>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 border-t border-outline-variant/10 text-center md:text-left text-slate-500 text-sm">
+            © 2026 Elementary Science Academy. All rights reserved.
+        </div>
+</footer>
+
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const activePage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('nav.glass-nav a[href]');
+    const glassNav = document.querySelector('nav.glass-nav');
+    const revealTargets = document.querySelectorAll([
+      'nav.glass-nav > div > *',
+      'body > header > *',
+      'main > section > *',
+      'main > section .grid > *',
+      'main > section .flex > *',
+      'main > section article',
+      'main > section li',
+      'main > section details',
+      'main > section a',
+      'main > section button',
+      'footer > *',
+      'footer .grid > *',
+      'footer .flex > *'
+    ].join(', '));
+    let navTicking = false;
+
+    function syncNavGlass() {
+      glassNav?.classList.toggle('is-scrolled', window.scrollY > 12);
+      navTicking = false;
+    }
+
+    function requestNavGlassSync() {
+      if (navTicking) return;
+      navTicking = true;
+      requestAnimationFrame(syncNavGlass);
+    }
+
+    function setActiveNav() {
+      navLinks.forEach(navLink => {
+        const linkTarget = navLink.getAttribute('href');
+        if (linkTarget === activePage || (activePage === '' && linkTarget === 'index.html')) {
+          navLink.classList.add('text-blue-900', 'font-bold', 'border-blue-900');
+        } else {
+          navLink.classList.remove('text-blue-900', 'font-bold', 'border-blue-900');
+        }
+      });
+    }
+
+    revealTargets.forEach((target, index) => {
+      target.classList.add('load-reveal');
+      target.style.transitionDelay = `${Math.min(index * 20, 180)}ms`;
+    });
+
+    const revealElement = element => element.classList.add('is-visible');
+
+    function runLoadReveal() {
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              revealElement(entry.target);
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -8% 0px'
+        });
+
+        revealTargets.forEach(target => revealObserver.observe(target));
+      } else {
+        requestAnimationFrame(() => {
+          revealTargets.forEach(revealElement);
+        });
+      }
+    }
+
+    if (document.documentElement.classList.contains('fonts-ready')) {
+      runLoadReveal();
+    } else {
+      window.addEventListener('fontsready', runLoadReveal, { once: true });
+    }
+
+    setActiveNav();
+    syncNavGlass();
+    window.addEventListener('scroll', requestNavGlassSync, { passive: true });
+
+
+  });
+</script>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="theme.js"></script>
+<script>
+  document.documentElement.classList.add('fonts-loading');
+  const revealFonts = () => {
+    document.documentElement.classList.remove('fonts-loading');
+    document.documentElement.classList.add('fonts-ready');
+    window.dispatchEvent(new Event('fontsready'));
+  };
+  if ('fonts' in document) {
+    Promise.race([
+      document.fonts.ready,
+      new Promise(resolve => window.setTimeout(resolve, 1200))
+    ]).then(revealFonts);
+  } else {
+    window.addEventListener('load', revealFonts, { once: true });
+  }
+</script>
+<style>
+  html.fonts-loading body { opacity: 0; }
+  html body { transition: opacity 140ms ease; }
+</style>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#bcc7dd",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e5e9eb",
+                        "tertiary-fixed": "#ffddba",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-background": "#181c1e",
+                        "surface-dim": "#d7dadc",
+                        "inverse-on-surface": "#eef1f3",
+                        "surface": "#f7fafc",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#4f2e00",
+                        "tertiary": "#321b00",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#43474e",
+                        "background": "#f7fafc",
+                        "surface-container": "#ebeef0",
+                        "outline-variant": "#c4c6cf",
+                        "on-tertiary-fixed": "#2b1700",
+                        "primary-fixed-dim": "#adc7f7",
+                        "tertiary-fixed-dim": "#f2bc82",
+                        "on-surface": "#181c1e",
+                        "inverse-primary": "#adc7f7",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#111c2c",
+                        "secondary-fixed": "#d8e3fa",
+                        "outline": "#74777f",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "secondary-container": "#d5e0f7",
+                        "surface-tint": "#455f88",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#86a0cd",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7fafc",
+                        "on-tertiary-fixed-variant": "#633f0f",
+                        "on-primary-fixed": "#001b3c",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary": "#545f72",
+                        "primary": "#002045",
+                        "on-secondary-container": "#586377",
+                        "primary-container": "#1a365d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#c6955e",
+                        "surface-container-low": "#f1f4f6",
+                        "on-secondary-fixed-variant": "#3c475a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        nav.glass-nav {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+            transform: translateZ(0);
+            transition:
+                background-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                -webkit-backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: background-color, border-color, box-shadow, backdrop-filter;
+        }
+
+        nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+        }
+
+        .dark nav.glass-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+        }
+
+        .dark nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .dark nav.glass-nav .font-headline {
+            color: #d6e3ff;
+        }
+
+        .dark nav.glass-nav .nav-link {
+            color: #eef1f3;
+        }
+
+        .dark nav.glass-nav .nav-link:hover,
+        .dark nav.glass-nav .nav-link.border-blue-900 {
+            color: #adc7f7;
+            border-bottom-color: #adc7f7;
+        }
+
+        nav.glass-nav > * {
+            position: relative;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        .nav-link {
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            backdrop-filter: saturate(150%) blur(16px);
+            -webkit-backdrop-filter: saturate(150%) blur(16px);
+        }
+
+        @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+            nav.glass-nav {
+                background-color: rgba(255, 255, 255, 0.72);
+            }
+
+            nav.glass-nav.is-scrolled {
+                background-color: rgba(255, 255, 255, 0.94);
+            }
+        }
+
+        nav.glass-nav::before,
+        nav.glass-nav::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #002045 0%, #1A365D 100%);
+        }
+        .progress-blade {
+            width: 4px;
+            background: linear-gradient(to bottom, #d6e3ff, #002045);
+        }
+        /* Page Transition Effects */
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); }
+            to { transform: translateX(100%); }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+    <style>
+        .load-reveal {
+            opacity: 0;
+            transform: translate3d(0, 14px, 0);
+            filter: blur(10px);
+            transition-property: opacity, transform, filter;
+            transition-duration: 260ms, 260ms, 320ms;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform, filter;
+        }
+        .load-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            filter: blur(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .load-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+<link href="theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 inset-x-0 w-full z-50 glass-nav">
+  <div class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-3 md:py-4 max-w-screen-2xl mx-auto gap-4">
+    <div class="text-lg sm:text-xl md:text-2xl font-black tracking-tighter text-blue-900 font-headline uppercase truncate min-w-0">
+      Elementary Science Academy
+    </div>
+    <div class="hidden lg:flex items-center space-x-8">
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="index.html">Home</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="about.html">About Us</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="courses.html">Courses</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="ESAT.html">ESAT</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="faculty.html">Faculty</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="facilities.html">Facilities</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="contact.html">Contact</a>
+    </div>
+    <a href="https://forms.gle/Ps53tca4W1hRnJbM7" class="bg-primary text-on-primary px-4 sm:px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95 whitespace-nowrap flex-shrink-0">
+      Enroll Now
+    </a>
+  </div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-8 py-24 overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<div class="md:w-1/2">
+<span class="label-md font-semibold text-primary uppercase tracking-widest mb-4 block">Our Legacy</span>
+<h1 class="font-headline text-5xl md:text-6xl font-extrabold text-primary leading-tight mb-8 tracking-tight">
+                        Pioneering <span class="text-on-primary-container">Academic Excellence</span>
+</h1>
+<p class="text-body-lg text-on-surface-variant leading-relaxed max-w-lg">
+                        Elementary Science Academy is dedicated to building strong academic foundations for students of classes 9 to 12.
+                    </p>
+</div>
+<div class="md:w-1/2 relative">
+<div class="rounded-2xl overflow-hidden shadow-2xl relative z-10 bg-white p-12 flex items-center justify-center">
+<img alt="Elementary Science Academy Logo" class="w-full h-full object-contain" data-alt="Official logo of Elementary Science Academy featuring a shield, mortarboard, and atomic symbol" src="Photos/LOGO.png"/>
+</div>
+<div class="absolute -bottom-6 -left-6 w-48 h-48 bg-primary-fixed-dim rounded-2xl -z-0 opacity-50"></div>
+<div class="absolute -top-6 -right-6 w-32 h-32 border-4 border-outline-variant rounded-2xl -z-0"></div>
+</div>
+</div>
+</section>
+<!-- Mission Section -->
+<section class="bg-surface-container-low py-24 px-8">
+<div class="max-w-5xl mx-auto text-center">
+<div class="inline-flex items-center gap-2 mb-6">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="label-md font-bold text-primary tracking-widest">OUR MISSION</span>
+<span class="w-12 h-[1px] bg-primary"></span>
+</div>
+<h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-8 leading-snug italic">
+                    "To provide quality education with personal attention in a supportive and motivating environment."
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="psychology">psychology</span>
+<h4 class="font-headline font-bold text-lg mb-2 text-primary">Inquisitive Mindset</h4>
+<p class="text-sm text-on-surface-variant">Encouraging curiosity as the first step to scientific discovery.</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="groups">groups</span>
+<h4 class="font-headline font-bold text-lg mb-2 text-primary">Personal Mentorship</h4>
+<p class="text-sm text-on-surface-variant">Small batches ensuring every student gets the attention they deserve.</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="rocket_launch">rocket_launch</span>
+<h4 class="font-headline font-bold text-lg mb-2 text-primary">Future Readiness</h4>
+<p class="text-sm text-on-surface-variant">Preparing students for competitive exams and higher education.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Focus Points Bento Grid -->
+<section class="px-8 py-24 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+<div class="max-w-xl">
+<span class="label-md font-semibold text-primary uppercase tracking-widest mb-4 block">Core Principles</span>
+<h2 class="font-headline text-4xl font-extrabold text-primary tracking-tight">Our Strategic Focus</h2>
+</div>
+<p class="text-on-surface-variant max-w-sm mb-2">We don't just teach; we architect pathways for student success through rigorous methodologies.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Point 1: Concept Clarity -->
+<div class="md:col-span-7 bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-sm group">
+<div class="progress-blade h-full"></div>
+<div class="p-8 md:w-1/2">
+<span class="material-symbols-outlined text-3xl text-primary-container mb-4" data-icon="lightbulb">lightbulb</span>
+<h3 class="font-headline text-2xl font-bold text-primary mb-4">Concept Clarity</h3>
+<p class="text-on-surface-variant mb-6">Deep dives into fundamental principles ensuring students grasp the 'why' before the 'how'.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-sm cursor-pointer group-hover:gap-4 transition-all">
+<span>Learn Methodology</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<div class="md:w-1/2 relative overflow-hidden">
+<img alt="Concept Clarity" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="detailed macro shot of complex scientific diagrams and notes written on a chalkboard with clean white chalk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnTmg5D5mBfZP0k0M7ljXTiMbddytyf4p4X4oI1R5va30LyaFvCogvmM8_dyvfPjC04ABsGLK7mCpkbFWq-cQGBGTbTf15gVBUxuJaKeAYsYJWC3J_7kLaQiZ514WjluabIbBi6ZNfzFjY8GrpGktH6IUwXQNGC29eqbNicW1sr7NsPPGTzkP0mjXz7GJTWdrTZN8VGeaZANJhh8cJrrlzdmZrot9fXtMOsRBDleLL7SCF6qMI6MRl2Hd5f94B3LGGXqPyYPtE"/>
+</div>
+</div>
+<!-- Point 2: Consistency & Discipline -->
+<div class="md:col-span-5 bg-primary-container text-on-primary rounded-2xl p-10 flex flex-col justify-between group">
+<div>
+<span class="material-symbols-outlined text-4xl text-primary-fixed-dim mb-6" data-icon="schedule">schedule</span>
+<h3 class="font-headline text-2xl font-bold mb-4">Consistency &amp; Discipline</h3>
+<p class="text-on-primary-container text-blue-100">Structured daily routines and regular assessments to build enduring study habits.</p>
+</div>
+<div class="mt-8 bg-white/10 p-6 rounded-xl backdrop-blur-sm">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold uppercase tracking-wider">Academic Rigor</span>
+<span class="text-xs">98% Success</span>
+</div>
+<div class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-fixed-dim h-full w-[98%]"></div>
+</div>
+</div>
+</div>
+<!-- Point 3: Affordable & Accessible -->
+<div class="md:col-span-12 bg-surface-container p-1 rounded-2xl shadow-sm">
+<div class="bg-surface-container-lowest rounded-[calc(1.5rem-4px)] p-12 flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/3">
+<img alt="Accessibility" class="rounded-xl aspect-square object-cover" data-alt="diverse group of happy students sitting in a modern study lounge with laptops and textbooks in a bright interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnY7r-z1epN-6tqh-8dXU2tkjcTtOHBYUOhmdZZrWqBPA9EdgY_wXVP-LycYjM2uVALRxf7H9VwkbMSte4Mwg4W8qPMzv6kQF3QnaWc_wdsxpkbNDMJqaswb2fq5MvuJvY51aSq34cqhLxK2d_VeomomiF5prxXY7rKYVfh_KMBf6az46icBwFMxm6UVLGwxuAyRGpXpsNyKzkcjr1DSloE7aIperMCf-06-LimbhXcpMVpA3JIfTGTHWgoXRzcHwkrjfD9Inf"/>
+</div>
+<div class="md:w-2/3">
+<div class="flex items-center gap-4 mb-6">
+<span class="p-3 bg-secondary-container text-on-secondary-container rounded-full material-symbols-outlined" data-icon="payments">payments</span>
+<h3 class="font-headline text-3xl font-bold text-primary">Affordable and Accessible Education</h3>
+</div>
+<p class="text-body-lg text-on-surface-variant mb-8 leading-relaxed">
+                                    Elite academic coaching shouldn't be a privilege. We have optimized our operational costs to ensure that world-class science and math education is reachable for every deserving student.
+                                </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="border-l-2 border-outline-variant pl-4">
+<div class="text-2xl font-black text-primary">Flat Fee</div>
+<div class="text-xs font-bold uppercase text-on-surface-variant">Transparent Pricing</div>
+</div>
+<div class="border-l-2 border-outline-variant pl-4">
+<div class="text-2xl font-black text-primary">Hybrid</div>
+<div class="text-xs font-bold uppercase text-on-surface-variant">Online &amp; Offline</div>
+</div>
+<div class="border-l-2 border-outline-variant pl-4">
+<div class="text-2xl font-black text-primary">Scholarships</div>
+<div class="text-xs font-bold uppercase text-on-surface-variant">Merit-based Aid</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Academic Excellence CTA -->
+<section class="px-8 py-20">
+  <div class="max-w-7xl mx-auto hero-gradient rounded-2xl p-12 md:p-20 text-center relative overflow-hidden">
+    
+    <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32"></div>
+    
+    <h2 class="font-headline text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">
+      Start Your Scientific Journey Today
+    </h2>
+    
+    <p class="text-blue-100 text-lg mb-10 max-w-2xl mx-auto relative z-10">
+      Join a community where excellence is a habit and curiosity is celebrated. Enrollment for the upcoming session is now open.
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+      
+      <!-- Download Prospectus -->
+      <a href="Brochure.pdf" download
+         class="bg-white text-primary px-8 py-4 rounded-lg font-bold hover:bg-blue-50 transition-all text-lg">
+         Download Prospectus
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/919079205366?text=Hello%20I%20would%20like%20to%20book%20a%20consultation%20to%20discuss%20course%20details%20and%20guidance."
+         target="_blank"
+         class="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition-all text-lg">
+         Consult an Advisor
+      </a>
+
+      <!-- Call Button -->
+      <a href="tel:9079205366"
+         class="bg-white/10 text-white px-8 py-4 rounded-lg font-bold hover:bg-white/20 transition-all text-lg border border-white/30">
+         Call Now
+      </a>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-50 border-t-0 mt-12">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
+
+    <div class="md:col-span-1">
+      <span class="text-xl font-black text-blue-900 font-headline mb-4 block">
+        Elementary Science Academy
+      </span>
+      <p class="text-slate-500 text-sm leading-relaxed">
+        Building the next generation of scientists, engineers, and thinkers with precision and care.
+      </p>
+
+      <div class="flex gap-4 mt-6">
+        <a href="https://maps.google.com/?q=Elementary+Science+Academy+Tonk" target="_blank" rel="noopener noreferrer" title="View Location">
+          <span class="material-symbols-outlined text-slate-500 hover:text-blue-700 cursor-pointer transition-transform hover:scale-110">location_on</span>
+        </a>
+        <a href="mailto:shubham0012.sg@gmail.com?subject=About%20Us%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20was%20reading%20about%20your%20academy%20and%20have%20a%20question..." title="Email Us">
+          <span class="material-symbols-outlined text-slate-500 hover:text-blue-700 cursor-pointer transition-transform hover:scale-110">mail</span>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <span class="label-md uppercase tracking-wider font-bold text-blue-900 mb-6 block">Resources</span>
+      <ul class="space-y-4">
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="facilities.html">Study Material</a></li>
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="courses.html">Course Catalog</a></li>
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="FAQ.pdf">FAQ</a></li>
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="ESAT.html">Scholarships</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="label-md uppercase tracking-wider font-bold text-blue-900 mb-6 block">Quick Links</span>
+      <ul class="space-y-4">
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="contact.html">Admission Enquiry</a></li>
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="faculty.html">Faculty</a></li>
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="courses.html">Courses</a></li>
+        <li><a class="text-slate-500 hover:text-blue-700 transition-colors" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="label-md uppercase tracking-wider font-bold text-blue-900 mb-6 block">Contact</span>
+      
+      <address class="not-italic text-slate-500 text-sm space-y-4">
+        
+        <p class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-blue-900 text-sm mt-1">location_on</span>
+          3rd Floor, Jio Office Building,<br/>
+          Near Emmanuel School, Tonk
+        </p>
+
+        <p class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-blue-900 text-sm">phone</span>
+          +91 9079205366 / 8905220266
+        </p>
+
+        <p class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-blue-900 text-sm">mail</span>
+          <a href="mailto:shubham0012.sg@gmail.com?subject=About%20Us%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20was%20reading%20about%20your%20academy%20and%20have%20a%20question..." class="hover:text-primary transition-colors">shubham0012.sg@gmail.com</a>
+        </p>
+
+      </address>
+    </div>
+
+  </div>
+
+  <div class="px-8 py-8 max-w-7xl mx-auto border-t border-slate-200">
+    <p class="text-slate-500 text-sm text-center">
+      © 2026 Elementary Science Academy. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const activePage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('nav.glass-nav a[href]');
+    const glassNav = document.querySelector('nav.glass-nav');
+    const revealTargets = document.querySelectorAll([
+      'nav.glass-nav > div > *',
+      'body > header > *',
+      'main > section > *',
+      'main > section .grid > *',
+      'main > section .flex > *',
+      'main > section article',
+      'main > section li',
+      'main > section details',
+      'main > section a',
+      'main > section button',
+      'footer > *',
+      'footer .grid > *',
+      'footer .flex > *'
+    ].join(', '));
+    let navTicking = false;
+
+    function syncNavGlass() {
+      glassNav?.classList.toggle('is-scrolled', window.scrollY > 12);
+      navTicking = false;
+    }
+
+    function requestNavGlassSync() {
+      if (navTicking) return;
+      navTicking = true;
+      requestAnimationFrame(syncNavGlass);
+    }
+
+    function setActiveNav() {
+      navLinks.forEach(navLink => {
+        const linkTarget = navLink.getAttribute('href');
+        if (linkTarget === activePage || (activePage === '' && linkTarget === 'index.html')) {
+          navLink.classList.add('text-blue-900', 'font-bold', 'border-blue-900');
+        } else {
+          navLink.classList.remove('text-blue-900', 'font-bold', 'border-blue-900');
+        }
+      });
+    }
+
+    revealTargets.forEach((target, index) => {
+      target.classList.add('load-reveal');
+      target.style.transitionDelay = `${Math.min(index * 20, 180)}ms`;
+    });
+
+    const revealElement = element => element.classList.add('is-visible');
+
+    function runLoadReveal() {
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              revealElement(entry.target);
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -8% 0px'
+        });
+
+        revealTargets.forEach(target => revealObserver.observe(target));
+      } else {
+        requestAnimationFrame(() => {
+          revealTargets.forEach(revealElement);
+        });
+      }
+    }
+
+    if (document.documentElement.classList.contains('fonts-ready')) {
+      runLoadReveal();
+    } else {
+      window.addEventListener('fontsready', runLoadReveal, { once: true });
+    }
+
+    setActiveNav();
+    syncNavGlass();
+    window.addEventListener('scroll', requestNavGlassSync, { passive: true });
+  });
+</script>
+</html>

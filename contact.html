@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="theme.js"></script>
+<title>Contact Us | Elementary Science Academy</title>
+<script>
+  document.documentElement.classList.add('fonts-loading');
+  const revealFonts = () => {
+    document.documentElement.classList.remove('fonts-loading');
+    document.documentElement.classList.add('fonts-ready');
+    window.dispatchEvent(new Event('fontsready'));
+  };
+  if ('fonts' in document) {
+    Promise.race([
+      document.fonts.ready,
+      new Promise(resolve => window.setTimeout(resolve, 1200))
+    ]).then(revealFonts);
+  } else {
+    window.addEventListener('load', revealFonts, { once: true });
+  }
+</script>
+<style>
+  html.fonts-loading body { opacity: 0; }
+  html body { transition: opacity 140ms ease; }
+</style>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "inverse-surface": "#2d3133",
+          "primary-fixed-dim": "#adc7f7",
+          "surface": "#f7fafc",
+          "on-secondary-container": "#586377",
+          "tertiary-container": "#4f2e00",
+          "surface-container-high": "#e5e9eb",
+          "secondary-container": "#d5e0f7",
+          "outline-variant": "#c4c6cf",
+          "tertiary-fixed": "#ffddba",
+          "secondary": "#545f72",
+          "surface-tint": "#455f88",
+          "error": "#ba1a1a",
+          "surface-container-low": "#f1f4f6",
+          "surface-container-highest": "#e0e3e5",
+          "surface-container-lowest": "#ffffff",
+          "on-tertiary-container": "#c6955e",
+          "on-secondary": "#ffffff",
+          "secondary-fixed-dim": "#bcc7dd",
+          "on-secondary-fixed": "#111c2c",
+          "on-tertiary-fixed": "#2b1700",
+          "primary": "#002045",
+          "on-primary-fixed": "#001b3c",
+          "primary-container": "#1a365d",
+          "outline": "#74777f",
+          "on-primary-container": "#86a0cd",
+          "on-surface": "#181c1e",
+          "on-background": "#181c1e",
+          "surface-bright": "#f7fafc",
+          "surface-variant": "#e0e3e5",
+          "surface-dim": "#d7dadc",
+          "inverse-primary": "#adc7f7",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed-variant": "#633f0f",
+          "surface-container": "#ebeef0",
+          "tertiary": "#321b00",
+          "on-secondary-fixed-variant": "#3c475a",
+          "secondary-fixed": "#d8e3fa",
+          "on-surface-variant": "#43474e",
+          "primary-fixed": "#d6e3ff",
+          "on-primary-fixed-variant": "#2d476f",
+          "background": "#f7fafc",
+          "on-error-container": "#93000a",
+          "on-error": "#ffffff",
+          "on-tertiary": "#ffffff",
+          "tertiary-fixed-dim": "#f2bc82",
+          "on-primary": "#ffffff",
+          "inverse-on-surface": "#eef1f3"
+        },
+        borderRadius: {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "xl-card": "1.5rem"
+        },
+        fontFamily: {
+          "headline": ["Manrope"],
+          "body": ["Inter"],
+          "label": ["Inter"]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .editorial-gradient {
+    background: linear-gradient(135deg, #002045 0%, #1A365D 100%);
+  }
+        nav.glass-nav {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+            transform: translateZ(0);
+            transition:
+                background-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                -webkit-backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: background-color, border-color, box-shadow, backdrop-filter;
+        }
+
+        nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+        }
+
+        .dark nav.glass-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+        }
+
+        .dark nav.glass-nav.is-scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(148, 163, 184, 0.22);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .dark nav.glass-nav .font-headline {
+            color: #d6e3ff;
+        }
+
+        .dark nav.glass-nav .nav-link {
+            color: #eef1f3;
+        }
+
+        .dark nav.glass-nav .nav-link:hover,
+        .dark nav.glass-nav .nav-link.border-blue-900 {
+            color: #adc7f7;
+            border-bottom-color: #adc7f7;
+        }
+
+        nav.glass-nav > * {
+            position: relative;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        .nav-link {
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            backdrop-filter: saturate(150%) blur(16px);
+            -webkit-backdrop-filter: saturate(150%) blur(16px);
+        }
+
+        @supports not ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+            nav.glass-nav {
+                background-color: rgba(255, 255, 255, 0.72);
+            }
+
+            nav.glass-nav.is-scrolled {
+                background-color: rgba(255, 255, 255, 0.94);
+            }
+        }
+
+        nav.glass-nav::before,
+        nav.glass-nav::after {
+            display: none !important;
+            content: none !important;
+        }
+
+  /* Page Transition Effects */
+  @keyframes slideOutLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  @keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slideOutRight {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+  @keyframes slideInLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+</style>
+    <style>
+        .load-reveal {
+            opacity: 0;
+            transform: translate3d(0, 14px, 0);
+            filter: blur(10px);
+            transition-property: opacity, transform, filter;
+            transition-duration: 260ms, 260ms, 320ms;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform, filter;
+        }
+        .load-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            filter: blur(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .load-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+<link href="theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed-dim">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 inset-x-0 w-full z-50 glass-nav">
+  <div class="flex justify-between items-center w-full px-4 sm:px-6 lg:px-8 py-3 md:py-4 max-w-screen-2xl mx-auto gap-4">
+    <div class="text-lg sm:text-xl md:text-2xl font-black tracking-tighter text-blue-900 font-headline uppercase truncate min-w-0">
+      Elementary Science Academy
+    </div>
+    <div class="hidden lg:flex items-center space-x-8">
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="index.html">Home</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="about.html">About Us</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="courses.html">Courses</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="ESAT.html">ESAT</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="faculty.html">Faculty</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="facilities.html">Facilities</a>
+      <a class="nav-link text-slate-700 hover:text-blue-800 transition-colors font-label text-sm font-semibold" href="contact.html">Contact</a>
+    </div>
+    <a href="https://forms.gle/Ps53tca4W1hRnJbM7" class="bg-primary text-on-primary px-4 sm:px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95 whitespace-nowrap flex-shrink-0">
+      Enroll Now
+    </a>
+  </div>
+</nav>
+<!-- Hero Section -->
+<header class="pt-32 pb-20 editorial-gradient text-white overflow-hidden relative">
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute -right-20 -top-20 w-96 h-96 bg-primary-fixed-dim rounded-full blur-[100px]"></div>
+    <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-primary-fixed-dim rounded-full blur-[100px]"></div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 relative z-10">
+    <div class="max-w-3xl">
+      <span class="inline-block text-primary-fixed-dim font-label text-sm font-semibold tracking-widest uppercase mb-4">Connect With Us</span>
+      <h1 class="text-5xl md:text-7xl font-headline font-extrabold tracking-tight mb-6 leading-tight">Get in Touch</h1>
+      <p class="text-lg md:text-xl text-on-primary-container leading-relaxed opacity-90 max-w-xl">
+        Whether you are an aspiring scientist or a curious parent, we are here to answer your questions and guide your academic journey.
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content Grid -->
+<main class="max-w-7xl mx-auto px-8 -mt-16 relative z-20 pb-24">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+    <!-- Contact Information Cards -->
+    <div class="lg:col-span-5 grid grid-cols-1 gap-6">
+
+      <!-- Location Card -->
+      <div class="bg-surface-container-lowest p-8 rounded-xl-card shadow-sm hover:shadow-md transition-shadow flex items-start gap-6 border-l-4 border-primary">
+        <div class="w-12 h-12 bg-secondary-container flex items-center justify-center rounded-xl text-primary shrink-0">
+          <span class="material-symbols-outlined">location_on</span>
+        </div>
+        <div>
+          <h3 class="font-headline font-bold text-xl mb-2 text-primary">Our Campus</h3>
+          <p class="text-on-surface-variant leading-relaxed">
+            3rd Floor, Jio Office Building,<br/>
+            Near Emmanuel School, Tonk,<br/>
+            Rajasthan, India
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact Info Card -->
+      <div class="bg-surface-container-lowest p-8 rounded-xl-card shadow-sm hover:shadow-md transition-shadow flex items-start gap-6 border-l-4 border-surface-tint">
+        <div class="w-12 h-12 bg-secondary-container flex items-center justify-center rounded-xl text-primary shrink-0">
+          <span class="material-symbols-outlined">call</span>
+        </div>
+        <div>
+          <h3 class="font-headline font-bold text-xl mb-2 text-primary">Phone &amp; Inquiry</h3>
+          <div class="flex flex-col gap-1">
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="tel:+919079205366">+91 90792 05366</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="tel:+918905220266">+91 89052 20266</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Card -->
+      <div class="bg-surface-container-lowest p-8 rounded-xl-card shadow-sm hover:shadow-md transition-shadow flex items-start gap-6 border-l-4 border-secondary">
+        <div class="w-12 h-12 bg-secondary-container flex items-center justify-center rounded-xl text-primary shrink-0">
+          <span class="material-symbols-outlined">alternate_email</span>
+        </div>
+        <div>
+          <h3 class="font-headline font-bold text-xl mb-2 text-primary">Academic Support</h3>
+          <p class="text-on-surface-variant"><a href="mailto:shubham0012.sg@gmail.com?subject=Contact%20Page%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20would%20like%20to%20get%20in%20touch%20regarding..." class="hover:text-primary transition-colors">shubham0012.sg@gmail.com</a></p>
+          <p class="text-sm text-outline mt-2 italic">For admission, batch, and visit enquiries.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Inquiry Form Section -->
+   <!-- Inquiry Form Section -->
+<div class="lg:col-span-7">
+  <section class="bg-surface-container-lowest p-10 rounded-xl-card shadow-sm">
+    <h2 class="text-3xl font-headline font-extrabold text-primary mb-2">Send an Inquiry</h2>
+    <p class="text-on-surface-variant mb-8">Fill out the form below and our academic coordinator will contact you shortly.</p>
+
+   <form action="https://formsubmit.co/shubham0012.sg@gmail.com" method="POST" enctype="multipart/form-data" class="space-y-6">
+      
+      <!-- Hidden settings -->
+      <input type="hidden" name="_subject" value="New Academic Inquiry Form Submission"/>
+      <input type="hidden" name="_captcha" value="false"/>
+      <input type="hidden" name="_template" value="table"/>
+      <input type="hidden" name="_autoresponse" value="Thank you for contacting Elementary Science Academy. We will reach out shortly."/>
+      
+      <!-- OPTIONAL: remove if you don’t have thankyou page -->
+      <input type="hidden" name="_next" value="thankyou.html"/>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label class="text-sm font-semibold text-primary font-label ml-1">Student/Parent Name</label>
+          <input name="name" class="w-full px-4 py-3 rounded-lg bg-surface-container-high border-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-outline/60" placeholder="John Doe" type="text" required/>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-sm font-semibold text-primary font-label ml-1">Contact Phone</label>
+          <input name="phone" class="w-full px-4 py-3 rounded-lg bg-surface-container-high border-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-outline/60" placeholder="+91 00000 00000" type="tel" required/>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <label class="text-sm font-semibold text-primary font-label ml-1">Current Grade / Standard</label>
+        <select name="grade" class="w-full px-4 py-3 rounded-lg bg-surface-container-high border-none focus:ring-2 focus:ring-primary/40 transition-all text-on-surface-variant" required>
+          <option value="">Select Grade</option>
+          <option>9th grade</option>
+          <option>10th grade</option>
+          <option>11th grade</option>
+          <option>12th grade</option>
+         <option>none</option>
+        </select>
+      </div>
+
+      <div class="space-y-2">
+        <label class="text-sm font-semibold text-primary font-label ml-1">Your Message</label>
+        <textarea name="message" class="w-full px-4 py-3 rounded-lg bg-surface-container-high border-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-outline/60 resize-none" placeholder="How can we help you today?" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="w-full editorial-gradient text-white font-bold py-4 rounded-lg shadow-lg hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
+        Submit Academic Inquiry
+        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">send</span>
+      </button>
+
+    </form>
+  </section>
+</div>
+    <!-- Map Section — full width -->
+    <div class="lg:col-span-12">
+      <section class="rounded-xl-card overflow-hidden shadow-sm relative group mt-4">
+        <div class="h-[450px] w-full relative">
+
+          <!-- OpenStreetMap embed — no API key needed -->
+         <<iframe
+  src="https://www.google.com/maps?q=26.170947,75.802786&z=17&output=embed"
+  width="100%"
+  height="100%"
+  style="border:0; display:block;"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade"
+  title="Campus Location Map">
+</iframe>
+          <!-- Map Info Overlay Card (inline, not fixed) -->
+          <div class="absolute bottom-6 left-6 z-10 bg-white shadow-2xl rounded-2xl p-4 w-72 border border-gray-200">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-blue-50 p-2 rounded-lg text-lg">📍</div>
+              <div>
+                <h4 class="font-bold text-primary text-sm">Visit Our Campus</h4>
+                <p class="text-xs text-gray-500">Tonk, Rajasthan</p>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <a href="https://maps.app.goo.gl/4ptwHp2tgRVA1C2m9" target="_blank" rel="noopener noreferrer"
+                 class="flex-1 bg-primary text-white text-sm py-2 rounded-lg font-bold text-center hover:opacity-90 transition-all">
+                Directions
+              </a>
+              <a href="https://wa.me/919079205366?text=Hi%2C%20I%20want%20to%20visit%20your%20institute" target="_blank" rel="noopener noreferrer"
+                 class="flex-1 bg-green-500 text-white text-sm py-2 rounded-lg font-bold text-center hover:opacity-90 transition-all">
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full mt-auto border-t border-slate-200/50 bg-slate-100">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-6">
+    <div class="flex flex-col gap-2">
+      <span class="text-lg font-bold text-blue-950 font-headline">Elementary Science Academy</span>
+      <p class="text-slate-500 font-body text-sm leading-relaxed">© 2026 Elementary Science Academy. Excellence in Scientific Inquiry.</p>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-slate-500 text-sm hover:underline decoration-blue-900/30 underline-offset-4" href="courses.html">Courses</a>
+      <a class="text-slate-500 text-sm hover:underline decoration-blue-900/30 underline-offset-4" href="faculty.html">Faculty</a>
+      <a class="text-slate-500 text-sm hover:underline decoration-blue-900/30 underline-offset-4" href="https://maps.app.goo.gl/4ptwHp2tgRVA1C2m9">Campus Map</a>
+      <a class="text-slate-500 text-sm hover:underline decoration-blue-900/30 underline-offset-4" href="mailto:shubham0012.sg@gmail.com?subject=Contact%20Page%20Inquiry&body=Hello%20Elementary%20Science%20Academy,%0A%0AI%20would%20like%20to%20get%20in%20touch%20regarding...">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const icon = document.getElementById('menu-icon');
+    const isHidden = menu.classList.contains('hidden');
+    menu.classList.toggle('hidden', !isHidden);
+    menu.classList.toggle('flex', isHidden);
+    icon.textContent = isHidden ? 'close' : 'menu';
+  }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const activePage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('nav.glass-nav a[href]');
+    const glassNav = document.querySelector('nav.glass-nav');
+    const revealTargets = document.querySelectorAll([
+      'nav.glass-nav > div > *',
+      'body > header > *',
+      'main > section > *',
+      'main > section .grid > *',
+      'main > section .flex > *',
+      'main > section article',
+      'main > section li',
+      'main > section details',
+      'main > section a',
+      'main > section button',
+      'footer > *',
+      'footer .grid > *',
+      'footer .flex > *'
+    ].join(', '));
+    let navTicking = false;
+
+    function syncNavGlass() {
+      glassNav?.classList.toggle('is-scrolled', window.scrollY > 12);
+      navTicking = false;
+    }
+
+    function requestNavGlassSync() {
+      if (navTicking) return;
+      navTicking = true;
+      requestAnimationFrame(syncNavGlass);
+    }
+
+    function setActiveNav() {
+      navLinks.forEach(navLink => {
+        const linkTarget = navLink.getAttribute('href');
+        if (linkTarget === activePage || (activePage === '' && linkTarget === 'index.html')) {
+          navLink.classList.add('text-blue-900', 'font-bold', 'border-blue-900');
+        } else {
+          navLink.classList.remove('text-blue-900', 'font-bold', 'border-blue-900');
+        }
+      });
+    }
+
+    revealTargets.forEach((target, index) => {
+      target.classList.add('load-reveal');
+      target.style.transitionDelay = `${Math.min(index * 20, 180)}ms`;
+    });
+
+    const revealElement = element => element.classList.add('is-visible');
+
+    function runLoadReveal() {
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              revealElement(entry.target);
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: '0px 0px -8% 0px'
+        });
+
+        revealTargets.forEach(target => revealObserver.observe(target));
+      } else {
+        requestAnimationFrame(() => {
+          revealTargets.forEach(revealElement);
+        });
+      }
+    }
+
+    if (document.documentElement.classList.contains('fonts-ready')) {
+      runLoadReveal();
+    } else {
+      window.addEventListener('fontsready', runLoadReveal, { once: true });
+    }
+
+    setActiveNav();
+    syncNavGlass();
+    window.addEventListener('scroll', requestNavGlassSync, { passive: true });
+  });
+</script>
+
+</body>
+</html>
